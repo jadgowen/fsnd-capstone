@@ -1,0 +1,777 @@
+{
+	"info": {
+		"_postman_id": "c97ce026-29a9-44a1-a75d-0af009ffdda1",
+		"name": "fsnd-capstone-tests",
+		"description": "Tests to validate Auth0 functionality within FSND Capstone application.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "public",
+			"item": [
+				{
+					"name": "healthy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d3b45f84-1a20-4b1a-be33-c15102f190bf",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"Healthy\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								""
+							]
+						},
+						"description": "test that server is active, only public API point"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "casting director",
+			"item": [
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e502ba15-5f3f-414d-9343-7c6408349525",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"value contains movies array\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.movies).to.be.an('array')\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/movies",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						},
+						"description": "Get Movies"
+					},
+					"response": []
+				},
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4e972810-a9b9-43f4-a279-a15e6c83457f",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"value contains actors array\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.actors).to.be.an('array')\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/actors",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						},
+						"description": "Get Actors"
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2f093f1b-0199-48e5-a6bf-40d684f8fa08",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"The Fast and the Furry Us\",\r\n    \"release_date\": \"2020-05-05\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}/movies",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						},
+						"description": "Add Movie"
+					},
+					"response": []
+				},
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "14061719-29dd-4ed4-9005-0ca4d2894477",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"A.C. Tore\",\r\n    \"age\": 25,\r\n    \"gender\": \"Female\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}/actors",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						},
+						"description": "Add Movie"
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b56ab78d-a112-4c90-8441-de481b1f15c4",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"The Fast and the Furry Us 2\",\r\n    \"release_date\": \"2021-04-02\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}/movies/1",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"1"
+							]
+						},
+						"description": "Add Movie"
+					},
+					"response": []
+				},
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dfc8b458-a87f-4bcd-b818-8d6473a6068f",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"AC Tor\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}/actors/1",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"1"
+							]
+						},
+						"description": "Add Movie"
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c90dde7e-67ec-42e7-8522-526f6e8f079d",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/movies/1",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"1"
+							]
+						},
+						"description": "Add Movie"
+					},
+					"response": []
+				},
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ff4e1285-290d-4eb2-9fcb-8afba0ad840d",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/actors/1",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"1"
+							]
+						},
+						"description": "Add Movie"
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkFtdFJGU0pkUm9vRGpVcElrbUFlViJ9.eyJpc3MiOiJodHRwczovL2ZzbmRqYWRnLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZjEzYzhlNWFmZGI2YzAwMTMyZTU0OTMiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAvZnNuZGNhcHN0b25lIiwiaWF0IjoxNTk3ODEzMDQ0LCJleHAiOjE1OTc4ODUwNDQsImF6cCI6IjE3NzZCcERZQWU5REZzSkI0UmpiTWt1YjFGOExtVjYwIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6YWN0b3JzIiwiZ2V0OmFjdG9ycyIsImdldDptb3ZpZXMiLCJwYXRjaDphY3RvcnMiLCJwb3N0OmFjdG9ycyJdfQ.O_3A8g_2My5EggyVKBnvdEMtX5xc2r3IreOdi42Bm5JhwyZWCtF4KD_XOZp_Jbvj7HiYZOXPMwhWD-GzsvlILb7FjItp7B7A5F8kLtLZkBX52Zc1iSrxwYq8tcKlfwY2VPB_H9PlviczxWJ8rG2pK2wOMPelJM4wLivnX8ViIZVtE466jpnPCsu6F9K1k4NytiJAJpPXAGozndksQX9GSn4yBQKIYsX1sa8rwwK9S5baJ4cq9Q28eJWU1-NtX6s68e9bZ-5Qbkbx9xoJ7jxzkw3mvYUPZvNDj8oDtO-7lfCP1eoaYVLy-QvoT7IDEm0Us3I7ChnBtCjwIHQhyssNgg",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "beed9ef8-edb7-464f-9ef5-fe4f8ce3fa14",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "528ce515-1d1c-45dd-9bae-8b95b69f44d5",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "executive producer",
+			"item": [
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d94daf48-e4a9-4f80-b87e-7fd537c87aff",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"value contains movies array\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.movies).to.be.an('array')\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/movies",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						},
+						"description": "Get Movies"
+					},
+					"response": []
+				},
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9bd2da23-77a6-40a1-85e5-d934c81b45ce",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"value contains actors array\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.actors).to.be.an('array')\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/actors",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						},
+						"description": "Get Actors"
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7e41bafe-3d60-43dc-8a53-6b40679e7b4a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"The Fast and the Furry Us\",\r\n    \"release_date\": \"2020-05-05\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}/movies",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						},
+						"description": "Add Movie"
+					},
+					"response": []
+				},
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a72b0252-9a50-4429-85a0-6fe0093b6c99",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"A.C. Tor\",\r\n    \"age\": 25,\r\n    \"gender\": \"Female\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}/actors",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						},
+						"description": "Add Movie"
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7374b8f7-6730-4326-acc9-26a8ebb2d712",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"The Fast and the Furry Us 2\",\r\n    \"release_date\": \"2021-04-02\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}/movies/1",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"1"
+							]
+						},
+						"description": "Add Movie"
+					},
+					"response": []
+				},
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ef522f39-143e-4a13-acbb-add15321f2b7",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"AC Tor\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{host}}/actors/1",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"1"
+							]
+						},
+						"description": "Add Movie"
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "45c1ebe1-b205-45d7-8141-66367b4d3365",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/movies/1",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"1"
+							]
+						},
+						"description": "Add Movie"
+					},
+					"response": []
+				},
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b9d149db-2f12-4e68-a6a6-8f569013305f",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{host}}/actors/1",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"1"
+							]
+						},
+						"description": "Add Movie"
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkFtdFJGU0pkUm9vRGpVcElrbUFlViJ9.eyJpc3MiOiJodHRwczovL2ZzbmRqYWRnLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZjAzYTEyNDJlYjMwMzAwMTljODM5ZjEiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAvZnNuZGNhcHN0b25lIiwiaWF0IjoxNTk3ODEzMTMwLCJleHAiOjE1OTc4ODUxMzAsImF6cCI6IjE3NzZCcERZQWU5REZzSkI0UmpiTWt1YjFGOExtVjYwIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6YWN0b3JzIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiLCJwb3N0Om1vdmllcyJdfQ.rUjre98xgg8ce1NUxOcq9OcPCNvQo3BIaEkVE53B-Vwk39mdBG6CE5pxOpv_v_Nfd1kTDov9S_bfOD_2PhbfUKE_xpT1V859_PX7KS7ii-IIuAjT9tAZZLdIGf8I35JZ2oHQwb5qm8XysR5c1Ya9yy4P_kG8xT5aAxIuNc95LSXmR9M08EQTxriEc63duqXDlakIsLELySgtDi1kAqqsEtmGQAW-3bOzCtZSr2ZGGVmYAqxw20Z1N075F1atkPRQ6zOwSkB7Wf9nYNwVUwjYx1Yw7zLVSMIS-RfXC_wLgnVhzveL05PEPDsQVPS4xUE7_A1IrBl3U9OPY9b3C0M_jQ",
+						"type": "string"
+					}
+				]
+			},
+			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkFtdFJGU0pkUm9vRGpVcElrbUFlViJ9.eyJpc3MiOiJodHRwczovL2ZzbmRqYWRnLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZjAzYTEyNDJlYjMwMzAwMTljODM5ZjEiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAvZnNuZGNhcHN0b25lIiwiaWF0IjoxNTk3ODEzMTMwLCJleHAiOjE1OTc4ODUxMzAsImF6cCI6IjE3NzZCcERZQWU5REZzSkI0UmpiTWt1YjFGOExtVjYwIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6YWN0b3JzIiwiZGVsZXRlOm1vdmllcyIsImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiLCJwb3N0Om1vdmllcyJdfQ.rUjre98xgg8ce1NUxOcq9OcPCNvQo3BIaEkVE53B-Vwk39mdBG6CE5pxOpv_v_Nfd1kTDov9S_bfOD_2PhbfUKE_xpT1V859_PX7KS7ii-IIuAjT9tAZZLdIGf8I35JZ2oHQwb5qm8XysR5c1Ya9yy4P_kG8xT5aAxIuNc95LSXmR9M08EQTxriEc63duqXDlakIsLELySgtDi1kAqqsEtmGQAW-3bOzCtZSr2ZGGVmYAqxw20Z1N075F1atkPRQ6zOwSkB7Wf9nYNwVUwjYx1Yw7zLVSMIS-RfXC_wLgnVhzveL05PEPDsQVPS4xUE7_A1IrBl3U9OPY9b3C0M_jQ",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "aefe631a-2c63-47f0-b900-0e9babf55f13",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "5bb3a9c0-12bf-4361-82cc-481123002704",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "6b4f1bfc-7223-4fc3-a87f-31cb0e7ff6e4",
+			"key": "host",
+			"value": "localhost:8080"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
